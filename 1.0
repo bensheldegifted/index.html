@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Operation Iron Will · NNN Command</title>
+<style>
+:root{--bg:#f3efe4;--card:#fffdf6;--ink:#1d2417;--mute:#667060;--line:#cfc8b2;--acc:#3f6b2b;--red:#b3322a;--gold:#c8961a;--silver:#8a949c;--bronze:#a8652f;--plat:#4aa3b8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10150d;--card:#1a2115;--ink:#ecebdc;--mute:#9aa392;--line:#323c2a;--acc:#86c25f;--red:#ef6b5f;--gold:#e8b835;--silver:#b5bec6;--bronze:#d68a52;--plat:#6fd0e6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10150d;--card:#1a2115;--ink:#ecebdc;--mute:#9aa392;--line:#323c2a;--acc:#86c25f;--red:#ef6b5f;--gold:#e8b835;--silver:#b5bec6;--bronze:#d68a52;--plat:#6fd0e6;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Georgia,'Times New Roman',serif}
+.wrap{max-width:880px;margin:0 auto;padding:20px 16px 60px}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
+header{text-align:center;padding:28px 8px 8px}
+.tag{font-size:12px;color:var(--mute)}
+h1{margin:6px 0 4px;font-size:clamp(30px,8vw,52px);line-height:1.05}
+h1 span{color:var(--acc)}
+.sub{color:var(--mute);max-width:520px;margin:0 auto}
+.day{display:flex;gap:10px;justify-content:center;margin:20px 0;flex-wrap:wrap}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;min-width:96px;text-align:center}
+.stat b{display:block;font-size:26px}.stat small{font-size:11px;color:var(--mute)}
+.bar{height:10px;border-radius:6px;background:var(--line);overflow:hidden;margin:0 auto 6px;max-width:520px}
+.bar i{display:block;height:100%;background:var(--acc)}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px}
+h2{margin:0 0 10px;font-size:19px}
+label{display:block;font-size:12px;color:var(--mute);margin:10px 0 4px}
+input,select{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:520px){.row{grid-template-columns:1fr}}
+button{font:inherit;cursor:pointer;border:0;border-radius:8px;padding:11px 16px;background:var(--acc);color:#fff;font-weight:bold;margin-top:12px}
+button.red{background:var(--red)}button.ghost{background:transparent;color:var(--mute);border:1px solid var(--line)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) button:not(.ghost){color:#10150d}}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{background:var(--bg);border:1px solid var(--line);color:var(--ink);font-weight:normal;padding:6px 10px;margin:0;border-radius:999px;font-size:14px}
+.chip.on{background:var(--red);color:#fff;border-color:var(--red)}
+.me{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.medal{font-size:54px;line-height:1}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.s{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
+.s .n{font-weight:bold}.s .d{font-size:13px;color:var(--mute)}
+.s.fall{border-left:4px solid var(--red)}
+.legend{display:flex;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--mute)}
+.legend span{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.note{font-size:13px;color:var(--mute);margin-top:8px}
+.empty{color:var(--mute);font-style:italic}
+.tabs{display:flex;gap:6px;margin-bottom:10px}.tabs button{margin:0;background:var(--bg);color:var(--ink);border:1px solid var(--line)}.tabs button.on{background:var(--acc);color:#fff}
+.hid{display:none}
+.ctry{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.hl{margin:10px auto 0;max-width:560px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:8px;padding:8px 12px;font-size:14px;text-align:left;min-height:40px}
+.flame{font-size:15px;font-weight:bold;color:var(--gold)}
+.fr{margin:8px 0}.fr .l{display:flex;justify-content:space-between;font-size:14px}.fr .t{height:12px;border-radius:6px;background:var(--red);overflow:hidden;margin-top:3px}.fr .t i{display:block;height:100%;background:var(--acc)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}.modal .box{background:var(--card);border-radius:14px;padding:14px;max-width:420px;width:100%;text-align:center}.modal img{width:100%;border-radius:10px}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}
+a.dlbtn{display:inline-block;padding:11px 16px;border-radius:8px;background:var(--acc);color:#fff;font-weight:bold;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="tag mono">★ Worldwide Command · November 1–30 ★</div>
+  <h1>Operation <span>Iron Will</span></h1>
+  <p class="sub">Enlist. Hold the line. If you fall, file an honest casualty report. Survivors on November 30 earn the Platinum Medal of Iron Will.</p>
+  <div class="day">
+    <div class="stat"><b id="dayNo">–</b><small class="mono">Day of 30</small></div>
+    <div class="stat"><b id="cServing">0</b><small class="mono">Serving</small></div>
+    <div class="stat"><b id="cFallen">0</b><small class="mono">Casualties</small></div>
+    <div class="stat"><b id="cNations">0</b><small class="mono">Nations</small></div>
+  </div>
+  <div class="bar"><i id="prog" style="width:0"></i></div>
+  <div class="tag mono" id="dbState"></div>
+  <div class="hl" id="headline">📡 Awaiting reports from the front…</div>
+</header>
+
+<section id="mine">
+  <div id="enlistBox">
+    <h2>📜 Enlist</h2>
+    <div class="row">
+      <div><label class="mono">Codename (no real names)</label><input id="name" maxlength="20" placeholder="e.g. Sergeant Willpower"></div>
+      <div><label class="mono">Home nation</label><select id="country"></select></div>
+    </div>
+    <label class="mono">Squad (optional, share the name with friends)</label><input id="squad" maxlength="16" placeholder="e.g. Alpha Company">
+    <button id="enlistBtn">Enlist for the cause</button>
+    <p class="note">Keep it clean: codenames and reasons are shown publicly.</p>
+  </div>
+  <div id="soldierBox" class="hid">
+    <div class="me"><div class="medal" id="myMedal">🎖️</div>
+      <div><h2 id="myName" style="margin:0"></h2><div id="myStatus" class="note" style="margin:2px 0 0"></div></div></div>
+    <div id="extraBox" style="margin-top:10px">
+      <div class="flame" id="streak"></div><div class="note" id="squadLine" style="margin:2px 0 6px"></div>
+      <div class="btnrow"><button id="ciBtn">✅ Morale check-in</button><button class="ghost" id="shareBtn">🖼️ Share medal card</button></div>
+    </div>
+    <div id="fallBox">
+      <button class="red" id="fallBtn">🏳️ Report myself a casualty</button>
+      <div id="fallForm" class="hid">
+        <label class="mono">Cause of failure</label>
+        <div class="chips" id="chips"></div>
+        <label class="mono">Or in your own words (max 80 chars)</label>
+        <input id="reason" maxlength="80" placeholder="Keep it PG">
+        <button class="red" id="fallGo">File casualty report</button>
+        <button class="ghost" id="fallCancel">Back to the trenches</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🎖️ Medals of Honor</h2>
+  <div class="legend"><span>🥉 Bronze · 7 days</span><span>🥈 Silver · 14 days</span><span>🥇 Gold · 21 days</span><span>🏆 Platinum · all 30</span><span>🪦 Fallen · remembered</span></div>
+</section>
+
+<section>
+  <div class="tabs"><button class="on" data-t="live">Still serving</button><button data-t="fall">War memorial</button><button data-t="nat">By nation</button><button data-t="squad">Squads</button><button data-t="front">Front line</button></div>
+  <div id="p-live" class="grid"></div>
+  <div id="p-fall" class="grid hid"></div>
+  <div id="p-nat" class="hid"></div>
+  <div id="p-squad" class="grid hid"></div>
+  <div id="p-front" class="hid"></div>
+</section>
+<p class="note" style="text-align:center">Self-reported on the honor system. A game of discipline and laughs, no shame allowed.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+// ===== CONFIG: paste your two Supabase values here (see README) =====
+const SUPABASE_URL='https://wxnsjlekgdzakjtlrust.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4bnNqbGVrZ2R6YWtqdGxydXN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0ODk2MTgsImV4cCI6MjEwOTA2NTYxOH0.XFX8nFL0RkMFLtOciTQNLoLq-XC6zgx4yCMYrEKc8hk';
+let sb=null;
+const COUNTRIES=[["GH","🇬🇭","Ghana"],["NG","🇳🇬","Nigeria"],["KE","🇰🇪","Kenya"],["ZA","🇿🇦","South Africa"],["EG","🇪🇬","Egypt"],["US","🇺🇸","United States"],["CA","🇨🇦","Canada"],["MX","🇲🇽","Mexico"],["BR","🇧🇷","Brazil"],["AR","🇦🇷","Argentina"],["GB","🇬🇧","United Kingdom"],["FR","🇫🇷","France"],["DE","🇩🇪","Germany"],["ES","🇪🇸","Spain"],["IT","🇮🇹","Italy"],["NL","🇳🇱","Netherlands"],["SE","🇸🇪","Sweden"],["PL","🇵🇱","Poland"],["TR","🇹🇷","Türkiye"],["SA","🇸🇦","Saudi Arabia"],["AE","🇦🇪","UAE"],["IN","🇮🇳","India"],["PK","🇵🇰","Pakistan"],["BD","🇧🇩","Bangladesh"],["CN","🇨🇳","China"],["JP","🇯🇵","Japan"],["KR","🇰🇷","South Korea"],["PH","🇵🇭","Philippines"],["ID","🇮🇩","Indonesia"],["AU","🇦🇺","Australia"],["NZ","🇳🇿","New Zealand"],["XX","🌍","Elsewhere on Earth"]];
+const REASONS=["Weak moment at 2 AM","Algorithm ambushed me","Boredom attack","Peer pressure from the squad","Forgot it was November","The Wi-Fi was too strong","Lost to my own overconfidence","Just wanted out, no regrets"];
+const $=id=>document.getElementById(id);
+const cInfo=c=>COUNTRIES.find(x=>x[0]===c)||COUNTRIES[COUNTRIES.length-1];
+const now=new Date();
+const inNov=now.getMonth()===10, afterNov=now.getMonth()>10;
+const today=afterNov?31:(inNov?now.getDate():0);
+function held(s){ if(s.status==='fallen') return Math.max(0,(s.fallDay||1)-1); return afterNov?30:Math.max(0,today-1); }
+function medal(d,fell){ if(d>=30&&!fell) return ['🏆','Platinum · Iron Will']; if(d>=21) return ['🥇','Gold']; if(d>=14) return ['🥈','Silver']; if(d>=7) return ['🥉','Bronze']; return [fell?'🪦':'🎖️',fell?'Fallen early':'Recruit']; }
+function tidy(t){return String(t||'').replace(/[<>]/g,'').trim().slice(0,80);}
+
+// state
+let db=null,uid=null,all=[],mine=null,pick='';
+const LS='nnn26';
+function lsGet(){try{return JSON.parse(localStorage.getItem(LS)||'null')}catch(e){return null}}
+function lsSet(v){try{localStorage.setItem(LS,JSON.stringify(v))}catch(e){}}
+
+// init selects/chips
+$('country').innerHTML=COUNTRIES.map(c=>`<option value="${c[0]}">${c[1]} ${c[2]}</option>`).join('');
+REASONS.forEach(r=>{const b=document.createElement('button');b.className='chip';b.textContent=r;b.onclick=()=>{pick=r;$('reason').value='';[...$('chips').children].forEach(x=>x.classList.toggle('on',x===b));};$('chips').appendChild(b);});
+$('reason').oninput=()=>{pick='';[...$('chips').children].forEach(x=>x.classList.remove('on'));};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));['live','fall','nat','squad','front'].forEach(t=>$('p-'+t).classList.toggle('hid',t!==b.dataset.t));});
+
+$('dayNo').textContent=inNov?today:(afterNov?'30':'0');
+$('prog').style.width=Math.min(100,Math.max(0,(afterNov?30:Math.max(0,today-1))/30*100))+'%';
+
+function card(s,fall){
+  const d=held(s),[m,l]=medal(d,fall),c=cInfo(s.country);
+  const el=document.createElement('div');el.className='s'+(fall?' fall':'');
+  const n=document.createElement('div');n.className='n';n.textContent=`${m} ${s.name} ${c[1]}`;
+  const x=document.createElement('div');x.className='d';
+  x.textContent=fall?`Fell on Nov ${s.fallDay} (${d} days held) · “${s.reason}”`:`${d} days held · ${l}`;
+  el.append(n,x);return el;
+}
+function render(){
+  const live=all.filter(s=>s.status!=='fallen'),fall=all.filter(s=>s.status==='fallen');
+  $('cServing').textContent=live.length;$('cFallen').textContent=fall.length;
+  $('cNations').textContent=new Set(all.map(s=>s.country)).size;
+  const fill=(id,arr,f,msg)=>{const e=$(id);e.replaceChildren();if(!arr.length){const p=document.createElement('div');p.className='empty';p.textContent=msg;e.appendChild(p);return;}arr.forEach(s=>e.appendChild(card(s,f)));};
+  fill('p-live',live.sort((a,b)=>held(b)-held(a)),false,'No soldiers yet. Be the first to enlist!');
+  fill('p-fall',fall.sort((a,b)=>(b.fallDay||0)-(a.fallDay||0)),true,'No casualties. Yet. Give it time.');
+  const by={};all.forEach(s=>{by[s.country]=by[s.country]||{a:0,f:0};by[s.country].a++;if(s.status==='fallen')by[s.country].f++;});
+  const nat=$('p-nat');nat.replaceChildren();
+  const ks=Object.keys(by).sort((a,b)=>(by[b].a-by[b].f)-(by[a].a-by[a].f));
+  if(!ks.length){nat.innerHTML='<div class="empty">No nations have reported in.</div>';}
+  ks.forEach(k=>{const d=document.createElement('div');d.className='ctry';const c=cInfo(k);const a=document.createElement('span');a.textContent=`${c[1]} ${c[2]}`;const b=document.createElement('span');b.textContent=`${by[k].a-by[k].f} serving · ${by[k].f} fallen`;d.append(a,b);nat.appendChild(d);});
+  // me
+  const has=!!mine;$('enlistBox').classList.toggle('hid',has);$('soldierBox').classList.toggle('hid',!has);
+  if(has){const d=held(mine),fell=mine.status==='fallen',[m,l]=medal(d,fell);
+    $('myMedal').textContent=m;$('myName').textContent=`${mine.name} ${cInfo(mine.country)[1]}`;
+    $('myStatus').textContent=fell?`Casualty on Nov ${mine.fallDay}. Cause: “${mine.reason}”. Honorable service: ${d} days.`:`Serving · ${d} days held · Rank: ${l}`;
+    $('fallBox').classList.toggle('hid',fell);}
+  extra();
+}
+async function save(s){
+  s=Object.fromEntries(Object.entries(s).filter(([k])=>k[0]!=='_'));mine=s;
+  if(sb&&uid){
+    const {error}=await sb.from('soldiers').upsert({id:uid,name:s.name,country:s.country,squad:s.squad||'',status:s.status,fall_day:s.fallDay||null,reason:s.reason||null,checkins:s.checkins||[],fall_at:s.fallAt?new Date(s.fallAt).toISOString():null});
+    if(error){$('dbState').textContent='Could not save: '+error.message;}
+    else await load();
+  }else{lsSet(s);const i=all.findIndex(x=>x._me);if(i>=0)all[i]=Object.assign({_me:1},s);else all.push(Object.assign({_me:1},s));}
+  render();
+}
+$('enlistBtn').onclick=()=>{const name=tidy($('name').value).slice(0,20);if(!name){$('name').focus();return;}
+  save({name,country:$('country').value,status:'serving',enlisted:Date.now(),squad:tidy($('squad').value).toUpperCase().slice(0,16),checkins:[]});};
+$('fallBtn').onclick=()=>{$('fallBtn').classList.add('hid');$('fallForm').classList.remove('hid');};
+$('fallCancel').onclick=()=>{$('fallBtn').classList.remove('hid');$('fallForm').classList.add('hid');};
+$('fallGo').onclick=()=>{const r=tidy($('reason').value)||pick;if(!r){return;}
+  save(Object.assign({},mine,{status:'fallen',reason:r,fallDay:inNov?now.getDate():(afterNov?30:1),fallAt:Date.now()}));};
+
+// ---- extras: streaks, squads, front line, headlines, share card
+let heads=[],hi=0;
+function streak(s){const c=new Set(s.checkins||[]);let d=today,n=0;if(!c.has(d))d--;while(d>0&&c.has(d)){n++;d--;}return n;}
+function flames(n){return n?'🔥'.repeat(Math.min(5,Math.ceil(n/3)))+` ${n}-day streak`:'No streak yet. Check in today!';}
+function extra(){
+  if(mine){const fell=mine.status==='fallen',done=(mine.checkins||[]).includes(today);
+    $('streak').textContent=flames(streak(mine));
+    $('squadLine').textContent=mine.squad?'Squad: '+mine.squad:'Lone wolf (no squad)';
+    $('ciBtn').disabled=fell||!inNov||done;$('ciBtn').textContent=fell?'Stood down':(!inNov?'Campaign not active':(done?'✅ Checked in today':'✅ Morale check-in'));
+    $('extraBox').classList.remove('hid');}
+  const sq={};all.forEach(s=>{if(!s.squad)return;const q=sq[s.squad]=sq[s.squad]||{n:0,up:0,d:0};q.n++;if(s.status!=='fallen')q.up++;q.d+=held(s);});
+  const sp=$('p-squad');sp.replaceChildren();const ks=Object.keys(sq).sort((a,b)=>sq[b].up-sq[a].up||sq[b].d-sq[a].d);
+  if(!ks.length)sp.innerHTML='<div class="empty">No squads formed. Enlist with a squad name and recruit friends.</div>';
+  ks.forEach(k=>{const e=document.createElement('div');e.className='s';const n=document.createElement('div');n.className='n';n.textContent='⚔️ '+k;const d=document.createElement('div');d.className='d';d.textContent=`${sq[k].up}/${sq[k].n} standing · ${sq[k].d} combined days held`;e.append(n,d);sp.appendChild(e);});
+  const by={};all.forEach(s=>{const q=by[s.country]=by[s.country]||{n:0,up:0};q.n++;if(s.status!=='fallen')q.up++;});
+  const fp=$('p-front');fp.replaceChildren();const fk=Object.keys(by).sort((a,b)=>by[b].up/by[b].n-by[a].up/by[a].n||by[b].n-by[a].n).slice(0,8);
+  if(!fk.length)fp.innerHTML='<div class="empty">No fronts yet.</div>';
+  fk.forEach((k,i)=>{const c=cInfo(k),p=Math.round(by[k].up/by[k].n*100);const r=document.createElement('div');r.className='fr';const l=document.createElement('div');l.className='l';const a=document.createElement('span');a.textContent=`${i===0?'🛡️ ':''}${c[1]} ${c[2]}`;const b=document.createElement('span');b.textContent=`${p}% holding · ${by[k].up}/${by[k].n}`;l.append(a,b);const t=document.createElement('div');t.className='t';const f=document.createElement('i');f.style.width=p+'%';t.appendChild(f);r.append(l,t);fp.appendChild(r);});
+  heads=[];const fallen=all.filter(s=>s.status==='fallen').sort((a,b)=>(b.fallAt||0)-(a.fallAt||0));
+  if(fallen[0])heads.push(`🪦 CASUALTY OF THE DAY: ${fallen[0].name} ${cInfo(fallen[0].country)[1]} fell on Nov ${fallen[0].fallDay}. “${fallen[0].reason}”`);
+  const top=all.filter(s=>s.status!=='fallen').sort((a,b)=>streak(b)-streak(a))[0];
+  if(top&&streak(top))heads.push(`🔥 LONGEST STREAK: ${top.name} ${cInfo(top.country)[1]} · ${streak(top)} days of morale`);
+  if(fk[0])heads.push(`🛡️ FRONT LINE: ${cInfo(fk[0])[2]} is holding strongest at ${Math.round(by[fk[0]].up/by[fk[0]].n*100)}%`);
+  if(!heads.length)heads.push('📡 Awaiting reports from the front…');
+  showHead();
+}
+function showHead(){$('headline').textContent=heads[hi%heads.length];}
+setInterval(()=>{hi++;showHead();},5000);
+$('ciBtn').onclick=()=>{if(!mine||!inNov)return;const c=new Set(mine.checkins||[]);c.add(today);save(Object.assign({},mine,{checkins:[...c]}));};
+$('shareBtn').onclick=async()=>{
+  if(!mine)return;const d=held(mine),fell=mine.status==='fallen',[m,l]=medal(d,fell);
+  const cv=document.createElement('canvas');cv.width=cv.height=1080;const x=cv.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,1080);g.addColorStop(0,'#2f4a20');g.addColorStop(1,'#10150d');x.fillStyle=g;x.fillRect(0,0,1080,1080);
+  x.strokeStyle='#c8961a';x.lineWidth=10;x.strokeRect(40,40,1000,1000);x.textAlign='center';x.fillStyle='#ecebdc';
+  x.font='bold 44px Georgia,serif';x.fillText('OPERATION IRON WILL · NOVEMBER 2026',540,150);
+  x.font='360px serif';x.fillText(m,540,520);
+  x.font='bold 84px Georgia,serif';x.fillText(mine.name+' '+cInfo(mine.country)[1],540,680);
+  x.fillStyle='#e8b835';x.font='bold 58px Georgia,serif';x.fillText(fell?'Fell with honor · '+d+' days':l,540,770);
+  x.fillStyle='#ecebdc';x.font='46px Georgia,serif';x.fillText(fell?'“'+mine.reason+'”':d+' days held · '+(streak(mine))+'-day streak',540,860);
+  x.font='36px Georgia,serif';x.fillStyle='#9aa392';x.fillText(mine.squad?'Squad '+mine.squad:'No Nut November Command',540,960);
+  const url=cv.toDataURL('image/png');
+  const md=document.createElement('div');md.className='modal';const bx=document.createElement('div');bx.className='box';
+  const im=document.createElement('img');im.src=url;im.alt='Medal card';const row=document.createElement('div');row.className='btnrow';row.style.justifyContent='center';
+  const cl=document.createElement('button');cl.className='ghost';cl.textContent='Close';cl.onclick=()=>md.remove();row.appendChild(cl);
+  const sv=document.createElement('a');sv.href=url;sv.download='iron-will-medal.png';sv.className='dlbtn';sv.textContent='Save image';row.prepend(sv);
+  bx.append(im,row);md.appendChild(bx);document.body.appendChild(md);
+};
+
+// boot: connect to Supabase (anonymous sign-in, realtime roll call)
+const local=lsGet();
+function offline(msg){mine=local;all=local?[Object.assign({_me:1},local)]:[];$('dbState').textContent=msg;render();}
+async function load(){
+  const {data,error}=await sb.from('soldiers').select('*').limit(5000);
+  if(error){$('dbState').textContent='Read error: '+error.message;return;}
+  all=data.map(r=>({_id:r.id,name:r.name,country:r.country,squad:r.squad||'',status:r.status,fallDay:r.fall_day,reason:r.reason,checkins:r.checkins||[],fallAt:r.fall_at?Date.parse(r.fall_at):0}));
+  mine=all.find(x=>x._id===uid)||null;
+  $('dbState').textContent='\u25cf Live \u00b7 worldwide roll call';render();
+}
+(async()=>{
+  $('dbState').textContent='Connecting to command\u2026';
+  if(!window.supabase||SUPABASE_URL.startsWith('PASTE')){offline('Setup needed \u00b7 offline mode');return;}
+  try{
+    sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+    let {data:{session}}=await sb.auth.getSession();
+    if(!session){const r=await sb.auth.signInAnonymously();if(r.error)throw r.error;session=r.data.session;}
+    uid=session.user.id;
+    await load();
+    let lt;sb.channel('roll').on('postgres_changes',{event:'*',schema:'public',table:'soldiers'},()=>{clearTimeout(lt);lt=setTimeout(load,1500);}).subscribe();
+    setInterval(load,60000);
+  }catch(e){offline('Offline mode \u00b7 '+(e.message||'cannot reach command'));}
+})();
+</script>
+</body>
+</html>
